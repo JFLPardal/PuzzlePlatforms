@@ -9,6 +9,17 @@ AMovingPlatform::AMovingPlatform()
 	SetMobility(EComponentMobility::Movable);
 }
 
+void AMovingPlatform::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (HasAuthority())
+	{
+		SetReplicates(true);		// for making this actor a replicateable one on the client side
+		SetReplicateMovement(true); // inform that the movement on this actor is to be replicated to the client
+	}
+}
+
 void AMovingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
