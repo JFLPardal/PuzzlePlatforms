@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ // Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "MovingPlatform.h"
@@ -27,7 +27,9 @@ void AMovingPlatform::Tick(float DeltaTime)
 	if (HasAuthority())
 	{
 		auto Location = GetActorLocation();
-		Location += FVector(Speed * DeltaTime, 0, 0);
+		FVector GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
+		FVector DirectionOfTarget = (GlobalTargetLocation - Location).GetSafeNormal();
+		Location += DirectionOfTarget * Speed * DeltaTime;
 		SetActorLocation(Location);
 	}
 }

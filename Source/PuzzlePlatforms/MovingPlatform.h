@@ -21,4 +21,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Setup")
 	int32 Speed = 20;
+
+	UPROPERTY(EditAnywhere, Meta = (MakeEditWidget = true))
+	FVector TargetLocation;
 };
